@@ -50,7 +50,7 @@ const EditBook = () =>{
     return(
         <div>
             <BackButton/>
-            <h1>Create Books</h1>
+            <h1>Edit Books</h1>
             {loading ? <Spinner/> : '' }
             <div style={{display:'flex', flexDirection:'column'}}>
                 <div>
