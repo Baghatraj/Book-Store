@@ -1,10 +1,12 @@
 import express from "express";
 import { port, mongodbURL } from "./config.js";
 import mongoose from "mongoose";
-import { Book } from "./model/bookModel.js";
+import bookRoute from "./routes/bookRoutes.js";
+import cors from 'cors';
 
 const app = express()
 
+app.use(cors()) // Allows All origins
 app.use(express.json())
 
 app.get('/',(req,res)=>{
@@ -12,33 +14,15 @@ app.get('/',(req,res)=>{
     return res.status(234).send('mern')
 })
 
-// Route for save book
+app.use('/books', bookRoute)
 
-app.post('/books', async(req,res)=>{
-    try {
-        if(
-            !req.body.title ||
-            !req.body.author ||
-            !req.body.publishYear
-        ) {
-        return res.status(400).send({
-            message : "Send all required fields : title ,author, publishYear"
-            })
-        }
-        const newBook = {
-            title : req.body.title,
-            author : req.body.author,
-            publishYear : req.body.publishYear,
-        }
-        const book = await Book.create(newBook)
 
-        return res.status(201).send(book);
-    }     
-     catch (error) {
-        console.log(error.message);
-        res.status(500);        
-    }
-})
+// app.use(cors({
+//     origin : 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+// }))
+
 
 mongoose.connect(mongodbURL,{useNewUrlParser:true}).then(()=>{
     console.log('connected');
