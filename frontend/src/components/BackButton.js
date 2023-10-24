@@ -5,7 +5,7 @@ const BackButton = ({destination = '/'}) =>{
     return(
         <div style={{display:'flex'}}>
             <Link to={destination}>
-                <BsArrowLeft/>
+                <BsArrowLeft style={{height:"50px", width:"50px"}}/>
             </Link>
         </div>
     )

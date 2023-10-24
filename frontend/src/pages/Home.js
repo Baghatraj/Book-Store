@@ -1,45 +1,47 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {MdOutlineAddBox} from 'react-icons/md'
+import { Link } from 'react-router-dom';
 import BookTable from "../components/BookTable";
 import BookCard from "../components/BookCard";
+import style from '../style/home.module.css';
 
-const Home = () =>{
+const Home = () => {
     const [books, setBooks] = useState([])
     const [loading, setloading] = useState(false)
-    const [type, setType] = useState('table')
+    const [type, setType] = useState('card')
 
-    useEffect(()=>{
+    useEffect(() => {
         setloading(true)
         axios.get('http://localhost:5000/books')
-        .then((res)=>{
-            setBooks(res.data.data)
-            setloading(false);
-        })
-        .catch((error)=>{
-            console.log(error);
-            setloading(false)
-        })
+            .then((res) => {
+                setBooks(res.data.data)
+                setloading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setloading(false)
+            })
 
-    },[])
+    }, [])
 
-    return(
+    return (
         <div>
-            <button onClick={()=> setType('table')}>
-                Table
-            </button>
-            <button onClick={()=> setType('card')}>
-                Card
-            </button>
-            <div style={{display:'flex', justifyContent:'space-between'}}>
+            <div className={style.type}>
+                <button className={style.btn} onClick={() => setType('card')}>
+                    Card
+                </button>
+                <button className={style.btn} onClick={() => setType('table')}>
+                    Table
+                </button>
+            </div>
+            <div className={style.title}>
                 <h1>Books List</h1>
                 <Link to='/books/create'>
-                    <MdOutlineAddBox />
+                    <button className={style.btn_create}>New Book</button>
                 </Link>
             </div>
-            {loading ? (<Spinner />):( type=== 'table' ? <BookTable books={books}/> : <BookCard/>)}
+            {loading ? (<Spinner />) : (type === 'table' ? <BookTable books={books} /> : <BookCard books={books} />)}
         </div>
     )
 }

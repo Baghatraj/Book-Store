@@ -1,0 +1,42 @@
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.box {
+    width: 300px;
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.year, .title, .author {
+    padding: 5px;
+}
+
+.year{
+    text-align: right;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.icons {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+svg {
+    stroke: black;
+    fill: black;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
