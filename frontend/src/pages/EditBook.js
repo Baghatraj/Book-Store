@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import style from '../style/pages.module.css';
+import { client } from "../client";
 
 const EditBook = () => {
 
@@ -16,7 +17,7 @@ const EditBook = () => {
 
     useEffect(() => {
         setloading(true)
-        axios.get(`http://localhost:5000/books/${id}`)
+        client.get(`/books/${id}`)
             .then((res) => {
                 setAuthor(res.data.data.author)
                 setPublishYear(res.data.data.publishYear)

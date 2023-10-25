@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton.js'
 import Spinner from '../components/Spinner.js';
 import style from '../style/pages.module.css';
+import { client } from "../client.js";
 
 
 const ShowBook = () => {
@@ -13,7 +14,7 @@ const ShowBook = () => {
 
     useEffect(() => {
         setloading(true);
-        axios.get(`http://localhost:5000/books/${id}`)
+        client.get(`/books/${id}`)
             .then((res) => {
                 setBook(res.data.data);
                 setloading(false);

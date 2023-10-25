@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
-import axios from 'axios';
+// import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BookTable from "../components/BookTable";
 import BookCard from "../components/BookCard";
 import style from '../style/home.module.css';
+import { client } from "../client";
 
 const Home = () => {
     const [books, setBooks] = useState([])
@@ -13,7 +14,7 @@ const Home = () => {
 
     useEffect(() => {
         setloading(true)
-        axios.get('http://localhost:5000/books')
+        client.get('/books')
             .then((res) => {
                 setBooks(res.data.data)
                 setloading(false);

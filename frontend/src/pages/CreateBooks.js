@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import style from '../style/pages.module.css'
+import style from '../style/pages.module.css';
+import { client } from "../client";
 
 const CreateBooks = () => {
 
@@ -18,7 +19,7 @@ const CreateBooks = () => {
             author,
             publishYear
         };
-        axios.post('http://localhost:5000/books', data)
+        client.post('/books', data)
             .then(() => {
                 setloading(false);
                 navigate('/')

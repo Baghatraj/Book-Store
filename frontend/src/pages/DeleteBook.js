@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
+// import axios from 'axios';
 import BackButton from '../components/BackButton.js';
 import Spinner from '../components/Spinner.js';
-import style from '../style/pages.module.css'
+import style from '../style/pages.module.css';
+import { client } from "../client";
 
 
 const DeleteBook = () => {
@@ -14,7 +15,7 @@ const DeleteBook = () => {
     const handleDeleteBook = (e) => {
         if (e.target.value === "yes") {
             setloading(true)
-            axios.delete(`http://localhost:5000/books/${id}`)
+            client.delete(`/books/${id}`)
                 .then(() => {
                     setloading(false);
                     navigate('/')
