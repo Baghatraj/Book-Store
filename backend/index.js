@@ -24,7 +24,7 @@ app.use('/books', bookRoute)
 // }))
 
 
-mongoose.connect(mongodbURL,{useNewUrlParser:true}).then(()=>{
+mongoose.connect(mongodbURL,{useNewUrlParser:true,useUnifiedTopology: true,writeConcern: {w: 'majority',},}).then(()=>{
     console.log('connected');
     app.listen(port, ()=>{
         console.log(`Server is listening to ${port}`);
