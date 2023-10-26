@@ -37,7 +37,7 @@ const EditBook = () => {
             publishYear
         };
         setloading(true)
-        axios.put(`http://localhost:5000/books/${id}`, data)
+        client.put(`/books/${id}`, data)
             .then(() => {
                 setloading(false);
                 navigate('/')
